@@ -13,16 +13,13 @@ def generate_database(name):
             );
         """))
 
-# TODO        
 def generate_doc_database(name):
     path = f'skeleton/{name}'
     os.makedirs(path, exist_ok=True)
-    with open(os.path.join(path, 'init.sql'), 'w') as f:
-        f.write(textwrap.dedent("""
-            CREATE TABLE IF NOT EXISTS systems (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(255)
-            );
+    with open(os.path.join(path, 'init.js'), 'w') as f:
+        f.write(textwrap.dedent(f"""
+            db = db.getSiblingDB('{name}');
+            db.createCollection("documents");
         """))
 
 
